@@ -1,0 +1,27 @@
+---
+
+- name: Include Master Variables List
+  include_vars: "{{ item }}"
+  with_items:
+     - roles/group_vars/all/vars.yml
+     - roles/group_vars/java/vars.yml
+
+- name: Create {{ jdk_folder }} directory 
+  win_file:
+    path: '{{ target_drive }}\{{ jdk_folder }}'
+    state: directory
+
+- name: Download {{ jdk_folder }} from repository
+  win_get_url:
+    url: "{{ artifactory_url }}/{{ artifact_jdk_path }}/{{ jdk_artifact }}"
+    url_username: "{{ artifactory_username }}"
+    url_password: "{{ artifactory_password }}"
+    dest: '{{ target_drive }}\{{ jdk_folder }}\{{ jdk_artifact }}'
+
+- name: Install {{ jdk_folder }} on host
+  win_shell: Start-Process '{{ target_drive }}\{{ jdk_folder}}\{{ jdk_artifact }}' -ArgumentList '/s ADDLOCAL="ToolsFeature,SourceFeature' -Wait -PassThru
+
+- name: Remove {{ jdk_folder }} directory 
+  win_file:
+    path: '{{ target_drive }}\{{ jdk_folder }}'
+    state: absent

@@ -1,0 +1,57 @@
+---
+
+- name: Include Master Variables List
+  include_vars: "{{ item }}"
+  with_items:
+     - roles/group_vars/all/vars.yml
+     - roles/group_vars/git/vars.yml
+
+- name: Install required tools for compiling git
+  yum:
+    name: "{{ item }}"
+    state: latest
+  with_items:
+    - curl-devel 
+    - expat-devel
+    - gettext-devel
+    - openssl-devel
+    - perl-devel     
+    - zlib-devel
+    - gcc
+    - kernel-headers
+    - perl-ExtUtils-MakeMaker
+
+- name: Remove Git version
+  yum:
+    name: git
+    state: absent
+
+- name: Download Git from repository
+  become: yes
+  get_url:
+    url: "{{ artifactory_url }}/{{ artifact_git_path }}/{{ git_artifact }}"
+    url_username: "{{ artifactory_username }}"
+    url_password: "{{ artifactory_password }}"
+    dest: /usr/src/{{ git_artifact }}
+
+- name: Unarchive Git Binaries
+  unarchive:
+    src: /usr/src/{{ git_artifact }}
+    dest: /usr/src
+    copy: no
+
+- name: Install Git
+  become: yes
+  shell: "{{ item }}"
+  args: 
+    chdir: /usr/src/{{ git_version }}/
+  with_items:
+    - make prefix=/usr/local/git all
+    - make prefix=/usr/local/git install
+    - echo "export PATH=/usr/local/git/bin:$PATH" >> /etc/bashrc
+    - source /etc/bashrc
+
+
+
+ 
+  

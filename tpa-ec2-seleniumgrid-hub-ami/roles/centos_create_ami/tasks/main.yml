@@ -1,0 +1,72 @@
+---
+
+- name: Include Master Variables List
+  include_vars: "{{ item }}"
+  with_items:
+     - roles/group_vars/all/vars.yml
+     - roles/group_vars/java/vars.yml
+
+
+- name: Get current vm intanceid by instancename
+  sudo: false
+  delegate_to: localhost
+  shell: aws ec2 describe-instances --filters 'Name=tag:Name,Values={{ target_instance_name }}' --query 'Reservations[0].Instances[0].InstanceId'
+  register: shell_result_instanceid 
+
+- name: Store instanceid
+  set_fact:
+    current_instance_id: "{{ shell_result_instanceid.stdout }}"
+
+- name: Display current instance id
+  debug: msg="InstanceId={{ current_instance_id }} - and start image creation"
+
+
+- name: Stop current instance for image creation
+  sudo: false
+  delegate_to: localhost
+  shell: aws ec2 stop-instances --instance-ids '{{ current_instance_id }}'
+  register: shell_result_stop 
+
+- name: Wait until instance stopped
+  sudo: false
+  delegate_to: localhost
+  shell:  aws ec2 wait instance-stopped --instance-ids '{{ current_instance_id }}'
+  register: shell_result_stop_wait 
+
+
+- name: Display start image creation
+  debug: msg="Successfully stopped the instance and Start image creation"
+
+
+- name: Create image from instance
+  sudo: false
+  delegate_to: localhost
+  shell: aws ec2 create-image --instance-id '{{ current_instance_id }}' --name "{{ target_image_name }}" --description "{{ target_image_name }}" 
+  register: shell_result_create_image 
+
+- name:  Wait until image exists - each tries take 10 min and total 30 min wait and throws error after that
+  local_action: shell aws ec2 wait image-exists --filters 'Name=name,Values={{ target_image_name }}'
+  register: res
+  retries: 3 
+  until: (res.rc != 255)
+  failed_when: (res.rc == 255)
+  changed_when: no
+
+- name: Display image exists message
+  debug: msg="AMI existis and waiting for ami available"
+
+- name: Wait for image available - each tries take 10 min and total 60 min wait and throws error after that
+  local_action: shell aws ec2 wait image-available --filters 'Name=name,Values={{ target_image_name }}'
+  register: res
+  retries: 6
+  until: (res.rc != 255)
+  failed_when: (res.rc == 255)
+  changed_when: no
+
+- name: Display image created message
+  debug: msg="Successfully created the AMI"
+
+
+
+
+

@@ -1,0 +1,5 @@
+---
+# Variables for Maven (Artifactory)
+maven_folder: maven
+maven_artifact: apache-maven-3.5.0-bin.zip
+maven_path_version: 3.5.0

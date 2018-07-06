@@ -1,0 +1,40 @@
+<data>
+   
+   
+   	<recordType name="WelcomePD" lockRecords="false">
+      <record name="TS1" Fname="sean" Lname="Beard" DOB="04-23-1976" Address="701 N Michigan Ave" City="chicago" State="IL" Zipcode="60611" />
+      <record name="TS2" Fname="sean1" Lname="Beard1" DOB="04-23-1980" Address="123 Main Dr" City="Des Plaines" State="IL" Zipcode="60018" />
+          
+  	 </recordType>
+   
+   	<recordType name="addAVehiclePD" lockRecords="false">
+      <record name="TS1" year="2013" make="HYUNDAI" model="SONATA" bstyle="GLS,SEDAN" />
+         
+  	 </recordType>
+
+	<recordType name="addVehicle_OwnerPD" lockRecords="false">
+	<record name="TS1" vehicleaquiredMonth="03" vehicleaquiredYear="2013" ownershipstatus="Owned" primaryuse="Pleasure" />
+	</recordType>
+	
+	<recordType name="AddPrimaryDriverPD" lockRecords="false">
+	<record name="TS1" mstatus="Single (never married)" empstatus="Firefighter" firstdriverlicense="17" currentresidence="Own" phonenumber="323-306-0101" emailid="sean.beard@gmail.com"/>
+         
+	</recordType>
+	
+	<recordType name="InsuranceHistoryPD" lockRecords="false">
+       <record name="TS1" currentautoins="Yes, I have my own policy" currentinsprovider="State Farm" policywrittenby="State Farm County" howlongpolicy="3 years" currentbodilylimit="$1,000,000/$1,000,000" whenpolicyexpire="10-26-2017" whennewcovstart="10-30-2017"/>
+	</recordType>
+	
+	<recordType name="YourDiscountOppPD" lockRecords="false">
+       <record name="TS1" enrolldrivewise="No, do not enroll me" />
+	</recordType>
+	
+	<recordType name="FinalDetailsPD" lockRecords="false">
+       <record name="TS1" driverlicensenum="123456789" statelicensed="Ohio" vinlearnmore="5NPEB4AC6DH546472" appodometerreading="143" />
+	</recordType>
+	<recordType name="PaymentInfoPD" lockRecords="false">
+       <record name="TS1" cardnum="6011000000000004" cardexpdatemm="2" cardexpdateyyyy="2017" />
+	</recordType>
+	
+	
+</data>

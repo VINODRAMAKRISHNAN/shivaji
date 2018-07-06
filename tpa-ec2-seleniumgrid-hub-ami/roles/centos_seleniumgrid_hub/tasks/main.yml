@@ -1,0 +1,58 @@
+---
+
+- name: Include Master Variables List
+  include_vars: "{{ item }}"
+  with_items:
+     - roles/group_vars/all/vars.yml
+     #- roles/group_vars/swarm/vars.yml
+
+
+- name: Copy selenium-server batch file to root
+  become: yes
+  copy:
+    src: dest-files/run-seleniumgrid-hub.sh
+    dest: '/root/run-seleniumgrid-hub.sh'
+
+- name: Copy selenium-server JAR file to root
+  become: yes
+  copy:
+    src: dest-files/selenium-server-standalone-3.12.0.jar
+    dest: '/root/selenium-server-standalone.jar'
+
+- name: Add line to run-seleniumgrid-hub.sh
+  become: yes
+  lineinfile:
+    path: /root/run-seleniumgrid-hub.sh
+    line: 'java -jar /root/selenium-server-standalone.jar -role hub -port 4445'
+
+
+- name: Add line to rc.local
+  become: yes
+  lineinfile:
+    path: /etc/rc.d/rc.local
+    line: '/root/run-seleniumgrid-hub.sh'
+
+
+- name: Give files priv
+  become: yes
+  file: 
+    path: "{{ item }}"
+    mode: 0777
+  with_items:
+    - /root/selenium-server-standalone.jar
+    - /root/run-seleniumgrid-hub.sh
+    - /etc/rc.d/rc.local
+
+- name: Restart server
+  command: /sbin/shutdown -r +1
+  async: 0
+  poll: 0
+  ignore_errors: true
+
+
+
+
+   
+
+
+  

@@ -1,0 +1,13 @@
+---
+- name: Configure Linux Node
+  hosts: seleniumhub-linux
+  remote_user: vagrant
+  roles: 
+    - yum_centos_updates
+    - centos_artifact_java
+    - centos_artifact_maven
+    - centos_artifact_git
+    - centos_seleniumgrid_hub
+
+     
+

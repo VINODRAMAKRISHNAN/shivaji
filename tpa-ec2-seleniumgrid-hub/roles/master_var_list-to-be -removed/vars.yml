@@ -1,0 +1,42 @@
+---
+
+# Linux Worker Node
+
+# Variables for Artifactory OSS Server
+artifactory_url: http://10.0.2.200:8081/artifactory 
+artifactory_username: node
+artifactory_password: node1
+
+# Variables for Jenkins Server
+jenkins_ip: 10.0.2.100
+
+user: centos
+
+target_repo: Node
+
+tools_build_repo: Node/Tools/build/maven
+tools_subversion_repo: Node/Tools/subversion
+tools_jdk_repo: Node/Tools/jdk/
+tools_swarm_repo: Node/Tools/
+
+# Variables for JDK installation (Artifactory)
+jdk_artifact: jdk-8u161-linux-x64.tar.gz
+jdk_path_version: jdk1.8.0_161
+
+# Variables for Maven (Artifactory)
+maven_artifact: apache-maven-3.5.3-bin.tar.gz
+maven_path_version: 3.5.3
+
+# Variables for Git installation (Artifactory)
+git_artifact: git-2.16.3.tar.gz
+git_version: git-2.16.3
+
+# Variables for Swarm Agent (Artifactory)
+swarm_artifact: swarm-client-3.11.jar
+
+# Variables for Swarm Batch File (Artifactory)
+swarm_batch: run-swarm-client.sh
+
+
+
+

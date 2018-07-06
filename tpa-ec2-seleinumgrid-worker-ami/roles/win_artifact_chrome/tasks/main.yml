@@ -1,0 +1,27 @@
+---
+
+- name: Include Master Variables List
+  include_vars: "{{ item }}"
+  with_items:
+     - roles/group_vars/all/vars.yml
+     - roles/group_vars/chrome/vars.yml
+
+- name: Create {{ chrome_folder }} directory 
+  win_file:
+    path: '{{ target_drive }}\{{ chrome_folder }}'
+    state: directory
+
+- name: Download {{ chrome_folder }} from repository
+  win_get_url:
+    url: "{{ artifactory_url }}/{{ artifact_chrome_path }}/{{ chrome_artifact }}"
+    url_username: "{{ artifactory_username }}"
+    url_password: "{{ artifactory_password }}"
+    dest: '{{ target_drive }}\{{ chrome_folder }}\{{ chrome_artifact }}'
+
+- name: Install {{ chrome_folder }} on host
+  win_shell: Start-Process '{{ target_drive }}\{{ chrome_folder }}\{{ chrome_artifact }}'-ArgumentList '--system-level' -Wait -PassThru
+
+- name: Remove {{ chrome_folder }} directory 
+  win_file:
+    path: '{{ target_drive }}\{{ chrome_folder }}'
+    state: absent

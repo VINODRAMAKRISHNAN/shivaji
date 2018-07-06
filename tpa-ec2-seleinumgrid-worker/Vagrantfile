@@ -1,0 +1,72 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+# All Vagrant configuration is done below. The "2" in Vagrant.configure
+# configures the configuration version (we support older styles for
+# backwards compatibility). Please don't change it unless you know what
+# you're doing.
+
+
+Vagrant.configure(2) do |config|
+	config.vm.synced_folder '.', '/vagrant', disabled: true 
+
+# AWS Dummy box we installed with Vagrant
+	config.vm.box = "dummy" 
+
+  	config.vm.communicator = "winrm"
+	
+     config.vm.guest = :windows
+ 	config.winrm.username= "vagrant"
+  	config.winrm.password= "vagrant"
+
+  	config.winrm.operation_timeout_sec=60
+  	config.winrm.read_timeout_sec=70
+  	config.winrm.retry_limit=600
+  	config.winrm.retry_delay=600
+  	config.vm.boot_timeout=600
+  	config.vm.graceful_halt_timeout=600
+  
+ 	config.vm.provider :aws do |aws, override|
+
+     aws.access_key_id = "xxxxxx"
+  aws.secret_access_key = "yyyyyyy"
+
+     aws.region_config "us-east-1", :ami => "ami-ba02d9c0"
+  	
+     aws.keypair_name = "kadmin"
+  	
+     aws.instance_type = "m4.large" 
+
+  	aws.subnet_id = "subnet-9c7105c6"
+
+ 	aws.associate_public_ip = false
+
+  	aws.security_groups =  ['sg-7fd7170d'] 
+  
+  	aws.private_ip_address = "10.0.2.83"
+	aws.iam_instance_profile_name="EC2SSMACCESS"
+     aws.tags = {
+          		"Name" => "SELENIUM-WORKER-WIN-10",
+        		}
+
+ 	aws.block_device_mapping = [
+            {
+                'DeviceName' => "/dev/sda1",
+                'VirtualName' => "root",
+                'Ebs.VolumeSize' => 30,
+                'Ebs.DeleteOnTermination' => true
+            }
+        ]
+
+ 	 end
+  	config.vm.provision "ansible" do |ansible|
+   		ansible.playbook = "seleniumgrid_worker.yml"
+  	end
+ end
+
+
+
+
+
+
+

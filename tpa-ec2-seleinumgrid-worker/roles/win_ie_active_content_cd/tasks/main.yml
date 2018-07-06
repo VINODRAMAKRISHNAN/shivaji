@@ -1,0 +1,13 @@
+---
+
+- name: Set IE Active Content CD
+  win_regedit:
+    path: HKCU:\Software\Microsoft\Internet Explorer\Main\FeatureControl\FEATURE_LOCALMACHINE_LOCKDOWN\Settings\
+    name: LOCALMACHINE_CD_UNLOCK
+    data: 1
+    type: dword
+
+
+
+
+

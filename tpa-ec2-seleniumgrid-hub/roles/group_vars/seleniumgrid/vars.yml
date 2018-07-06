@@ -1,0 +1,7 @@
+---
+
+# Variables for Seleniumgrid Hub Agent JAR (Artifactory)
+seleniumgridhub_artifact: swarm-client-3.11.jar
+
+# Variables for Seleniumgrid Hub Batch File (Artifactory)
+seleniumgridhub_batch: run-seleniumgrid-hub.sh

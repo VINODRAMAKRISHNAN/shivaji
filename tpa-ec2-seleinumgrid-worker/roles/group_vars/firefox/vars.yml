@@ -1,0 +1,4 @@
+---
+# Variables for FireFox (Artifactory)
+ff_folder: firefox
+ff_artifact: Firefox-59.0-en-US-silent.exe

@@ -1,0 +1,6 @@
+---
+
+# Variables for JDK installation (Artifactory)
+jdk_artifact: jdk-8u161-linux-x64.tar.gz
+jdk_path_version: jdk1.8.0_161
+

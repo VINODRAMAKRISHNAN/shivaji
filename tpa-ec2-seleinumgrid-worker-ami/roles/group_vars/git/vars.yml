@@ -1,0 +1,4 @@
+---
+# Variables for Git installation (Artifactory)
+git_folder: git
+git_artifact: Git-2.16.2-64-bit.exe

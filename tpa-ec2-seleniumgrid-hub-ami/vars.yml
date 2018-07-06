@@ -1,0 +1,35 @@
+---
+
+configs:
+    current: 'dev'
+    dev:
+        aws:
+            access_key_id: "xxxxxxxxx"
+            secret_access_key: "yyyyyyyyyyyyyyy"
+            region_config: "us-east-1"
+            keypair_name : "kadmin"
+            instance_type: "t2.large"
+            subnet_id: "subnet-9c7105c6"
+            associate_public_ip: false
+            security_groups: ['sg-7fd7170d']
+            private_ip_address: "10.0.2.37"
+            hostname: "SELENIUM-HUB-10.0.2.37"
+            ami: "ami-4bf3d731"
+            devicename : "/dev/sda1"
+            virtualname : "root"
+            ebsvolumesize : 30
+            deleteontermination : true
+
+
+        ansible: 
+            playbook_filename: "seleniumgrid_hub.yml"
+            sudo: true
+            inventory_path: "hosts"
+            limit : "seleniumhub-linux"
+
+        ssh: 
+            username: "centos"
+            pwd: 
+            private_key_path: "./"
+            private_key_pemfilename: "kadmin.pem"
+

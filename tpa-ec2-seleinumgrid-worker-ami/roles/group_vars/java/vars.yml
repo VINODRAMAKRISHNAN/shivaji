@@ -1,0 +1,6 @@
+---
+
+# Variables for JDK installation (Artifactory)
+jdk_folder: java
+jdk_artifact: jdk-8u161-windows-x64.exe
+jdk_path_version: 1.8.0_161

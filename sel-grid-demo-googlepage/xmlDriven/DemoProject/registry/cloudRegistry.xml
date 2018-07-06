@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cloudRegistry xmlns="http://www.xframium.org/cloudRegistry" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.xframium.org/cloudRegistry http://www.xframium.org/xsd/deviceManagement/cloudRegistry.xsd">
+
+	<cloud name="local" userName="" password="" hostName="10.0.2.46:4445" providerType="SELENIUM" />
+	<!-- <keepAlive implementation="org.xframium.device.keepAlive.SnapshotKeepAlive" pollTime="10" quietTime="60"/> 	 -->
+</cloudRegistry>

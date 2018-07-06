@@ -1,0 +1,37 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+# All Vagrant configuration is done below. The "2" in Vagrant.configure
+# configures the configuration version (we support older styles for
+# backwards compatibility). Please don't change it unless you know what
+# you're doing.
+
+Vagrant.configure("2") do |config|
+
+  config.vm.box = "dummy" 
+  config.ssh.insert_key = false
+  config.vm.provider :aws do |aws, override|
+  aws.access_key_id = "xxxxxx"
+  aws.secret_access_key = "yyyyyyy"
+  aws.region_config "us-east-1", :ami => "ami-4bf3d731"
+  aws.keypair_name = "kadmin"
+  aws.instance_type = "m3.xlarge" 
+  aws.subnet_id = "subnet-9c7105c6"
+  aws.associate_public_ip = false
+  aws.security_groups =  ['sg-7f5b5508']   
+  aws.private_ip_address = "10.0.2.46"
+  override.ssh.username = "centos"
+  aws.tags = {
+            "Name" => "Selenium Hub - 10.0.2.46",
+        }
+override.ssh.private_key_path = "./kadmin.pem"
+
+
+  end
+ config.vm.provision "ansible" do |ansible|
+        ansible.playbook = "seleniumgrid_hub.yml"
+        ansible.sudo = true
+        ansible.inventory_path = "hosts"
+        ansible.limit = "seleniumhub-linux"
+       end
+end

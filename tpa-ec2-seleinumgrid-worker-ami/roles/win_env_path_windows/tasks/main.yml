@@ -1,0 +1,12 @@
+---
+
+- name: Include JDK | Git | Maven | System - Directory in the PATH
+  win_path:
+    state: present
+    name: "{{ item.name }}"
+    elements: "{{ item.value }}"
+    scope: machine
+  with_items:
+     - { name: 'PATH', value: 'C:\PROGRA~1\Java\jdk{{jdk_path_version}}\bin;C:\Windows;C:\Program Files\Git\cmd;C:\apache-maven-{{maven_path_version}}\bin;C:\apache-maven-{{maven_path_version}};%SystemRoot%\system32' }
+     - { name: 'JAVA_HOME', value: 'C:\PROGRA~1\Java\jdk{{jdk_path_version}}' }
+

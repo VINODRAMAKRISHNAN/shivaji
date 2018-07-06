@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<applicationRegistry xmlns="http://www.xframium.org/applicationRegistry" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.xframium.org/applicationRegistry http://www.xframium.org/xsd/deviceManagement/applicationRegistry.xsd">
+	
+<!-- 	<application name="AOS" appPackage="" bundleId="" url="https://purchase-stest.allstate.com/onlinesalesweb/app/auto/" /> -->
+	
+	<application name="Google" appPackage="" bundleId="" url="https://www.google.com/" />
+
+</applicationRegistry>
+
+
+
+ 

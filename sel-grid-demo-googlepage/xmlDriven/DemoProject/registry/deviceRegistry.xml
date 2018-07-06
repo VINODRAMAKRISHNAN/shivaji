@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<deviceRegistry xmlns="http://www.xframium.org/deviceRegistry" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.xframium.org/deviceRegistry http://www.xframium.org/xsd/deviceManagement/deviceRegistry.xsd">
+	<device name="IE" os="Windows" browserName="internetexplorer" availableDevices="1" manufacturer="Microsoft" model="IE" active="true" >
+		  <capability name="applicationName" class="STRING">AOS</capability>
+		  <capability name="ignoreProtectedModeSettings" class="BOOLEAN">true</capability>
+    </device>
+    
+	<device name="Firefox" os="Windows" browserName="firefox" manufacturer="Mozilla" model="Firefox" active="false" />
+	<device name="Chrome" os="Windows" browserName="chrome" manufacturer="Google" model="Chrome" active="true" >
+		<capability name="applicationName" class="STRING">AOS</capability> 
+	</device>
+	
+	<device name="phantomjs" os="Windows" browserName="phantomjs" manufacturer="ghostdriver" model="ghostdriver" active="false" />
+</deviceRegistry>
+

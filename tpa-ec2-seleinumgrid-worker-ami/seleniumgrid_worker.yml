@@ -1,0 +1,19 @@
+---
+
+- name: Configure Windows 10 Enterprise Worker Node
+  hosts: all
+  remote_user: vagrant
+  roles: 
+      - win_config_ssmagent_uac
+      #- win_artifact_jdk
+      #- win_artifact_maven
+      #- win_artifact_chrome
+      #- win_artifact_git
+      #- win_ie_active_content_cd
+      #- win_ie_active_content_desktop
+      #- win_ie_disable_protected_mode
+      #- win_ie_set_screen_zoom
+      #- win_env_path_windows
+      #- win_create_ami
+  
+  

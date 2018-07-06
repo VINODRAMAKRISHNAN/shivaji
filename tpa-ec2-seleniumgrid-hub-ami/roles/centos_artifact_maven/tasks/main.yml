@@ -1,0 +1,37 @@
+- name: Include Master Variables List
+  include_vars: "{{ item }}"
+  with_items:
+     - roles/group_vars/all/vars.yml
+     - roles/group_vars/maven/vars.yml
+
+- name: Download Maven from repository
+  become: yes
+  get_url:
+    url: "{{ artifactory_url }}/{{ artifact_maven_path }}/{{ maven_artifact }}"
+    url_username: "{{ artifactory_username }}"
+    url_password: "{{ artifactory_password }}"
+    dest: /opt/{{ maven_artifact }}
+
+- name: Unarchive Maven Binaries
+  unarchive:
+    src: /opt/{{ maven_artifact }}
+    dest: /opt/
+    copy: no
+
+- name: Change their ownership to root
+  become: yes
+  shell: chown -R root:root /opt/apache-maven-{{ maven_path_version }}
+
+- name: Create a version-irrelevant symbolic link pointing to the original Apache Maven {{ maven_path_version }} directory
+  shell: sudo ln -s /opt/apache-maven-{{ maven_path_version }} /opt/apache-maven
+
+- name: Update path for maven use
+  shell: echo 'export PATH=$PATH:/opt/apache-maven/bin' | sudo tee -a /etc/profile
+
+- name: Update path for maven use
+  shell: source /etc/profile
+
+- name: Cleaning Up
+  file:
+    state: absent
+    path: /opt/{{ maven_artifact }}

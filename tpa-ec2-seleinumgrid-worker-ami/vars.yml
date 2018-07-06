@@ -1,0 +1,44 @@
+---
+
+configs:
+    current: 'dev'
+    dev:
+        vm: 
+            communicator: "winrm"
+            guest: "&#58windows" 
+
+        winrm: 
+            username: "vagrant"
+            password: "vagrant"
+
+        aws:
+            access_key_id: "xxxxxx"
+            secret_access_key: "yyyyyyyy"
+            region_config: "us-east-1"
+            keypair_name : "kadmin"
+            instance_type: "t2.large"
+            subnet_id: "subnet-9c7105c6"
+            associate_public_ip: false
+            security_groups: ['sg-7fd7170d']
+            private_ip_address: "10.0.2.13"
+            hostname: "SELENIUM-WORKER-WIN-10-10.0.2.13"
+            ami: "ami-ba02d9c0"
+            devicename : "/dev/sda1"
+            virtualname : "root"
+            ebsvolumesize : 30
+            deleteontermination : true
+            iam_instance_profile_name : "EC2SSMACCESS"
+
+
+        ansible: 
+            playbook_filename: "seleniumgrid_worker.yml"
+            sudo: true
+            inventory_path: "hosts"
+            limit : ""
+
+        ssh: 
+            username: "centos"
+            pwd: 
+            private_key_path: "./"
+            private_key_pemfilename: "kadmin.pem"
+

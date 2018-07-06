@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<elementDefinition xmlns="http://www.xframium.org/pageRegistry" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.xframium.org/pageRegistry http://www.xframium.org/xsd/pageManagement/pageRegistry.xsd">
+   <site name="Demo">
+   
+     <page name="Google">
+     	<element name="SignIn" descriptor="ID" value="gb_70" />
+      	<element name="Email" descriptor="ID" value="identifierId" />
+            	
+     </page>
+    
+    
+      	
+   </site>
+   
+</elementDefinition>

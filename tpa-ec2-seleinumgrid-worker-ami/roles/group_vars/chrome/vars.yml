@@ -1,0 +1,5 @@
+---
+
+# Variables for Chrome (Artifactory)
+chrome_folder: chrome
+chrome_artifact: 61.0.3163.100_chrome_installer.exe

@@ -1,0 +1,47 @@
+#
+# Cloud Registry
+#
+cloudRegistry.provider=XML
+cloudRegistry.fileName=../xmlDriven/DemoProject/registry/cloudRegistry.xml
+cloudRegistry.cloudUnderTest=local
+
+#
+# Application Registry
+#
+applicationRegistry.provider=XML
+applicationRegistry.fileName=../xmlDriven/DemoProject/registry/applicationRegistry.xml
+applicationRegistry.applicationUnderTest=Google
+
+#
+# Device Management
+#
+deviceManagement.provider=XML
+deviceManagement.driverType=WEB
+deviceManagement.fileName=../xmlDriven/DemoProject/registry/deviceRegistry.xml
+
+#
+# Page Object Configuration
+#
+pageManagement.siteName=Demo
+pageManagement.provider=XML
+pageManagement.fileName=../xmlDriven/DemoProject/ObjectRepository/PageElements_Demo.xml
+#pageManagement.pageData.provider=XML
+#pageManagement.pageData.fileName=../xmlDriven/DemoProject/TestData/PageData_Demo.xml
+
+#
+# Artifact Production
+# 
+artifactProducer.provider=Perfecto
+artifactProducer.parentFolder=test-output
+artifactProducer.automated=EXECUTION_REPORT_HTML,FAILURE_SOURCE,CONSOLE_LOG,WCAG_REPORT,EXECUTION_RECORD_CSV,EXECUTION_RECORD_HTML
+
+#
+# Driver Configuration
+#
+driver.frameworkType=XML
+driver.configName=../xmlDriven/DemoProject/Test_Demo.xml
+driver.embeddedServer=false
+# Keywords Integration
+#
+#integrations.import=integrations.allstate
+#integrations.allstate.initialization=com.allstate.keywords.KeywordInitializer

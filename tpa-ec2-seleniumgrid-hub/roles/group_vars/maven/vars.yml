@@ -1,0 +1,4 @@
+---
+# Variables for Maven (Artifactory)
+maven_artifact: apache-maven-3.5.3-bin.tar.gz
+maven_path_version: 3.5.3

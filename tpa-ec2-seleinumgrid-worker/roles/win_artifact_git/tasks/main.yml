@@ -1,0 +1,27 @@
+---
+
+- name: Include Master Variables List
+  include_vars: "{{ item }}"
+  with_items:
+     - roles/group_vars/all/vars.yml
+     - roles/group_vars/git/vars.yml
+
+- name: Create {{ git_folder }} directory 
+  win_file:
+    path: '{{ target_drive }}\{{ git_folder }}'
+    state: directory
+
+- name: Download {{ git_folder }} from repository
+  win_get_url:
+    url: "{{ artifactory_url }}/{{ artifact_git_path }}/{{ git_artifact }}"
+    url_username: "{{ artifactory_username }}"
+    url_password: "{{ artifactory_password }}"
+    dest: '{{ target_drive }}\{{ git_folder }}\{{ git_artifact }}'
+
+- name: Install {{ git_folder }} on host
+  win_shell: Start-Process '{{ target_drive }}\{{ git_folder }}\{{ git_artifact }}' -ArgumentList '/VERYSILENT /SUPPRESSMSGBOXES /      FORCECLOSEAPPLICATIONS' -Wait -PassThru
+
+- name: Remove {{ git_folder }} directory 
+  win_file:
+    path: '{{ target_drive }}\{{ git_folder }}'
+    state: absent

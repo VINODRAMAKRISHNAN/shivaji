@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<xFramium xmlns="http://www.xframium.org/xFramiumDriver" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.xframium.org/xFramiumDriver http://www.xframium.org/xsd/xFramiumDriver.xsd">
+  <cloud provider="XML" fileName="registry/cloudRegistry.xml" name="local" />
+  <!-- < KeepAlive implementation="" pollTime="" quietTime="" />
+   -->
+  <application provider="XML" name="AOS" fileName="registry/applicationRegistry.xml" />
+  <devices provider="XML" fileName="registry/deviceRegistry.xml">
+  </devices>
+  
+
+    
+  <!-- retryCount="3" -->
+  <driver type="WEB" outputFolder="test-output"  displayResults="true"  suiteName="xTest" embeddedServer="true"  >
+    <property name="selenium.timeouts.implicitWait">5000</property>
+     <property name="pageManagement.pageData.tabNames">WelcomePD</property>
+    <propertyAdapter className="org.xframium.device.property.SeleniumPropertyAdapter" />
+  
+     
+    <artifact type="FAILURE_SOURCE" />
+    
+   <!--  <property name="jira.server">http://jira-compozed-test:8443/</property>
+	<property name="jira.username"></property>
+	<property name="jira.password"></property>
+	<property name="jira.projectkey">ZTV</property>
+	<property name="jira.versionname">Sprint 1 - Early Adopter</property>
+	<property name="jira.cyclename"></property>
+	<property name="jira.attachment">true</property> -->
+    
+
+
+    
+    <artifact type="DEVICE_LOG" />
+   <!--  <artifact type="WCAG_REPORT" /> -->
+    <artifact type="EXECUTION_RECORD_HTML" />
+    <artifact type="EXECUTION_RECORD_JSON" />
+    <artifact type="CONSOLE_LOG" />
+    <artifact type="GRID_REPORT" />
+    <artifact type="REPORTIUM" />
+   <!--  <artifact type="JIRA_UPDATE_STATUS" /> -->
+   
+ <library name="integrations.allstate" className = "com.allstate.keywords.KeywordInitializer" />  
+   </driver>
+   
+   <model provider="XML" siteName="AOS" fileName="ObjectRepository/AOS-pageElements.xml" />
+   <suite provider="XML" fileName="AOS-Tests3.xml" /> 
+  <!--   <suite provider="XML" fileName="TestScripts/AOS-Tests3.xml" />  -->
+    <data provider="XML" fileName="TestData/AOS-pageData.xml" /> 
+  	<!-- <data provider="EXCEL" fileName="TestData/GoogleData.xlsx" />  -->
+</xFramium>

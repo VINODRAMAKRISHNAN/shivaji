@@ -1,0 +1,13 @@
+---
+
+- name: Set IE Active Content My Computer 
+  win_regedit:
+    path: HKCU:\Software\Microsoft\Internet Explorer\Main\FeatureControl\FEATURE_LOCALMACHINE_LOCKDOWN\
+    name: iexplore.exe
+    data: 0
+    type: dword
+
+
+
+
+

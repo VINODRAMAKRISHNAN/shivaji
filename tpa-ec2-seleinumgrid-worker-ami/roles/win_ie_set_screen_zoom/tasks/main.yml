@@ -1,0 +1,13 @@
+---
+
+- name: Set IE Screen Zoom 
+  win_regedit:
+    path: HKCU:\SOFTWARE\Microsoft\Internet Explorer\Zoom\
+    name: ZoomFactor
+    data: 100000
+    type: dword
+
+
+
+
+

@@ -1,0 +1,62 @@
+---
+
+- name: Include Master Variables List
+  include_vars: "{{ item }}"
+  with_items:
+     - roles/group_vars/all/vars.yml
+     - roles/group_vars/java/vars.yml
+
+- name: remove the Java package
+  yum:
+    name: "{{ item }}"
+    state: absent
+  with_items:
+     - java-1.6.0-openjdk
+     - java-1.7.0-openjdk
+     - java-1.8.0-openjdk
+
+- name: Download Java from repository
+  become: yes
+  get_url:
+    url: "{{ artifactory_url }}/{{ artifact_jdk_path }}/{{ jdk_artifact }}"    
+    url_username: "{{ artifactory_username }}"
+    url_password: "{{ artifactory_password }}"
+    dest: /opt/{{ jdk_artifact }}
+
+- name: Unarchive Java Binaries
+  unarchive:
+    src: /opt/{{ jdk_artifact }}
+    dest: /opt/
+    copy: no
+
+- name: Alternatives
+  become: yes
+  shell: "{{ item }}"
+  args:
+    chdir: /opt/{{ jdk_path_version }}/
+  with_items:
+    - alternatives --install /usr/bin/java java /opt/{{ jdk_path_version }}/bin/java 2
+    - alternatives --install /usr/bin/jar jar /opt/{{ jdk_path_version }}/bin/jar 2
+    - alternatives --install /usr/bin/javac javac /opt/{{ jdk_path_version }}/bin/javac 2
+    - alternatives --set jar /opt/{{ jdk_path_version }}/bin/jar
+    - alternatives --set javac /opt/{{ jdk_path_version }}/bin/javac
+
+- name: Java Home
+  lineinfile:
+    dest: /etc/bashrc
+    line: "JAVA_HOME=/opt/{{ jdk_path_version }}"
+
+- name: Java Environment
+  lineinfile:
+    dest: /etc/bashrc
+    line: "PATH=$JAVA_HOME/bin:$PATH"    
+
+- name: Cleaning Up
+  file:
+    state: absent
+    path: /opt/{{ jdk_artifact }}
+
+
+
+
+

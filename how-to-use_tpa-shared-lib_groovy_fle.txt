@@ -1,0 +1,64 @@
+
+
+def utilityLib(){    
+	//loading from the groovy file repository 
+    def util = null
+    fileLoader.withGit('ssh://git-codecommit.us-east-1.amazonaws.com/v1/repos/tpa-allstate-work-to-share', 'master' , env.AWSCC_GITCREDID, '') {
+		util = fileLoader.load('tpa-shared-lib.groovy');
+	}
+   return util
+}
+
+node("master"){
+    def  utilb = utilityLib()
+    def workerinstancetypetag="SELENIUM-WORKER-WIN10"
+    def ienoofworkernodesrequired =0
+    def chromenoofworkernodesrequired =0
+    def appname ="" //consider only the first app name if more than one cnofigured
+	cleanWs();
+	checkout([$class: 'GitSCM',branches: [[name: '*/master']],doGenerateSubmoduleConfigurations: false,extensions:[],submoduleCfg: [],userRemoteConfigs: [[ credentialsId: '' + env.AWSCC_GITCREDID,url: 'ssh://git-codecommit.us-east-1.amazonaws.com/v1/repos/tpa-allstate-work-to-share']]])
+	
+   
+	dir ('sel-grid-demo-googlepage/xmlDriven/DemoProject/registry') {
+        try {
+            def xml = readFile "deviceRegistry.xml"
+    	    def devicereg = new XmlParser().parseText(xml)
+    	   
+    	    def rtuple = utilb.getWorkerNodeDetails(devicereg.device)
+    	    if (rtuple !=null && rtuple.get(0) != null){
+    	        ienoofworkernodesrequired=rtuple.get(0)
+    	    }
+    	    if (rtuple !=null && rtuple.get(1) != null){
+    	        chromenoofworkernodesrequired=rtuple.get(1)
+    	    }
+    	    if (rtuple !=null && rtuple.get(2) != null){
+    	        appname=rtuple.get(2)
+    	    }
+    	   println('XML parsed successfully');
+        }
+        catch(Exception testError){
+            println('XML parsed failed=' + testError);
+        }
+    }
+    println('appname=' + appname);
+    println('ienoofworkernodesrequired=' + ienoofworkernodesrequired);
+    println('chromenoofworkernodesrequired=' + chromenoofworkernodesrequired);
+    def ret = utilb.getRequiredStoppedInstanceIds(ienoofworkernodesrequired,chromenoofworkernodesrequired);
+    println ('ret-legnth=' + ret.length);
+    utilb.startRequiredInstancesByArray(ret);
+    utilb.runSSMCommandToConnectWorkerToHub(ret,ienoofworkernodesrequired,chromenoofworkernodesrequired);
+    //call the maven pipline with xframium test to be tested
+    try{
+        build job: 'test-vinod-maven', parameters: [[$class: 'StringParameterValue', name: 'projHome', value: '../xmlDriven/DemoProject']]
+        println('Pipeline Job:test-vinod-maven COMPELTED-SUCCSSFULLY')
+    }
+    catch(terr3){
+        println('Pipeline Job:test-vinod-maven Failed: Err: ' + terr3)
+    }
+    
+   
+    utilb.stopRequiredInstancesByArray(ret);
+    println ('successfully started the instances and connected to the hub');
+    
+}
+

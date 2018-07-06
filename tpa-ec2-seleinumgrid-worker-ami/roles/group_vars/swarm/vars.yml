@@ -1,0 +1,5 @@
+---
+# Variables for Swarm (Artifactory)
+swarm_folder: swarm
+swarm_artifact: swarm-client-3.12.jar
+swarm_batch_artifact: run-swarm-client.bat

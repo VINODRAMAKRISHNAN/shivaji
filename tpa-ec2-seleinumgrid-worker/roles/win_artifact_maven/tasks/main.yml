@@ -1,0 +1,27 @@
+---
+
+- name: Include Master Variables List
+  include_vars: "{{ item }}"
+  with_items:
+     - roles/group_vars/all/vars.yml
+     - roles/group_vars/maven/vars.yml
+
+- name: Create {{ maven_folder }} directory 
+  win_file:
+    path: '{{ target_drive }}\{{ maven_folder }}'
+    state: directory
+
+- name: Download {{ maven_folder }} from repository
+  win_get_url:
+    url: "{{ artifactory_url }}/{{ artifact_maven_path }}/{{ maven_artifact }}"
+    url_username: "{{ artifactory_username }}"
+    url_password: "{{ artifactory_password }}"
+    dest: '{{ target_drive }}\{{ maven_folder }}\{{ maven_artifact }}'
+
+- name: Unzip {{ maven_folder }} file on host
+  win_shell: expand-archive -path {{ target_drive }}\{{ maven_folder }}\{{ maven_artifact }} -destinationpath {{ target_drive }}\
+
+- name: Remove {{ maven_folder }} directory 
+  win_file:
+    path: '{{ target_drive }}\{{ maven_folder }}'
+    state: absent 

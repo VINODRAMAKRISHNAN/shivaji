@@ -1,0 +1,31 @@
+---
+
+
+- name: Include Master Variables List
+  include_vars: "{{ item }}"
+  with_items:
+     - roles/group_vars/all/vars.yml
+     - roles/group_vars/java/vars.yml
+
+
+- name: Create connect-to-hub batch file
+  win_file:
+    path: c:\ssm\connect-to-hub.bat
+    state: touch
+
+
+- name: Add required text to connect-to-hub batch file
+  win_lineinfile:
+    path: c:\ssm\connect-to-hub.bat
+    line: '{{ item }}'
+  with_items:
+    - 'echo off'
+    - set arg1driver=%1
+    - set arg2driverexe=%2
+    - set arg3hubip=%3
+    - set arg4hubport=%4
+    - set arg5nodeport=%5
+    - set arg6browsername=%6
+    - set arg7appname=%7
+    - java -Dwebdriver.%arg1driver%.driver="C:\ssm\%arg2driverexe%.exe" -jar C:\ssm\selenium-server-standalone.jar -role node -hub http://%arg3hubip%:%arg4hubport%/grid/register -port %arg5nodeport% -browser "browserName=%arg6browsername%, applicationName=%arg7appname%, maxInstances=1"
+

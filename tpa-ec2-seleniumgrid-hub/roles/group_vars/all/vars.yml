@@ -1,0 +1,30 @@
+---
+
+# Target Drive
+target_drive: "c:" 
+
+# Variables for Artifactory OSS Server
+artifactory_url: http://10.0.2.200:8081/artifactory
+artifactory_username: node
+artifactory_password: node2
+
+user: vagrant
+
+artifact_jdk_path: Node/Tools/jdk
+artifact_maven_path: Node/Tools/build/maven
+artifact_git_path: Node/Tools/subversion
+artifact_chrome_path: Node/Browsers/chrome
+artifact_selenium_path: Node/Tools/selenium
+
+
+# Variables for SeleniuGrid Hub
+seleniumgridhub_ip: 10.0.2.46
+seleniumgridhub_port: 5786
+
+user: centos
+
+
+
+
+
+

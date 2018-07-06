@@ -1,0 +1,4 @@
+---
+# Variables for Git installation (Artifactory)
+git_artifact: git-2.16.3.tar.gz
+git_version: git-2.16.3

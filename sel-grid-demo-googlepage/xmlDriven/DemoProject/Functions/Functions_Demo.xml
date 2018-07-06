@@ -1,0 +1,337 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<suite xmlns="http://www.xframium.org/testRegistry" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.xframium.org/testRegistry http://www.xframium.org/xsd/pageManagement/testRegistry.xsd">
+   	<model>
+    	<page name="Google" />      
+	</model>
+	
+		
+	<function name="fWelcomepageTest" dataProvider="WelcomePD.TS1">
+		<step page="Welcome" name="fname" type="SET" >
+		<parameter type="DATA" value="WelcomePD.Fname" />
+		</step>
+		<step page="Welcome" name="lname" type="SET" >
+		<parameter type="DATA" value="WelcomePD.Lname" />
+		</step>
+	<step page="Welcome" name="dob" type="SET" >
+		<parameter type="DATA" value="WelcomePD.DOB" />
+		</step>
+		<step page="Welcome" name="saddress" type="SET" >
+		<parameter type="DATA" value="WelcomePD.Address" />
+		</step>
+		<!-- 	<step page="Welcome" name="city" type="SET" >
+		<parameter type="DATA" value="WelcomePD.City" />
+		</step>
+		<step page="Welcome" name="state" type="SET" >
+		<parameter type="DATA" value="WelcomePD.State" />
+		</step>
+		<step page="Welcome" name="zipcode" type="SET" >
+		<parameter type="DATA" value="WelcomePD.Zipcode" />
+		</step>
+		<step page="Welcome" name="User_Env" type="WAIT" >
+		<parameter type="STATIC" value="1" />
+		</step>
+		<step page="Welcome" name="welcome_continuebtn.CLICKABLE" type="WAIT_FOR" >
+		<parameter type="STATIC" value="30" />
+		</step>	
+		<step page="Welcome" name="welcome_continuebtn" type="CLICK" >
+		</step>
+		
+		<step page="Welcome" name="User_Env" type="WAIT" /> -->
+		
+</function>
+
+ <function name="faddAVehicleTest" dataProvider="addAVehiclePD.TS1" >
+		<step page="addAVehicle" name="add_Vehiclebtn.VISIBLE" type="WAIT_FOR" >
+		<parameter type="STATIC" value="60" />
+		</step>
+		<step name="add_Vehiclebtn" page="addAVehicle" type="WAIT" >
+		 			<parameter type="STATIC" value="1" />
+		 	 	 </step> 
+		<step page="addAVehicle" name="add_Vehiclebtn" type="CLICK" >
+		</step>
+		<step page="addAVehicle" name="User_Env" type="WAIT" />
+		
+		<step page="addAVehicle" name="yearmakemodel_radiobtn" type="CLICK" >
+		</step>
+		<step page="addAVehicle" name="year" type="SET" >
+		<parameter type="DATA" value="addAVehiclePD.year" />
+		</step>
+		<step page="addAVehicle" name="make" type="SET" >
+		<parameter type="DATA" value="addAVehiclePD.make" />
+		</step>
+		<step page="addAVehicle" name="model" type="SET" >
+		<parameter type="DATA" value="addAVehiclePD.model" />
+		</step>
+		<step page="addAVehicle" name="bstyle" type="SET" >
+		<parameter type="DATA" value="addAVehiclePD.bstyle" />
+		</step>
+		
+		<step page="addAVehicle" name="User_Env" type="WAIT" >
+		<parameter type="STATIC" value="30" />
+		</step>
+		
+		<step page="addAVehicle" name="addAVehicle_continuebtn" type="CLICK" >
+		</step> 
+		
+		<step page="addAVehicle" name="User_Env" type="WAIT" />
+		
+</function>
+
+<function name="faddVehicle_Owner" dataProvider="addVehicle_OwnerPD.TS1">
+
+		<step page="addVehicle_Owner" name="vehiclepurchashedYes.VISIBLE" type="WAIT_FOR" />
+		<step page="addVehicle_Owner" name="vehiclepurchashedYes" type="CLICK" > </step>
+		<step page="addVehicle_Owner" name="vehicleaquiredMonth" type="SET" >
+		<parameter type="DATA" value="addVehicle_OwnerPD.vehicleaquiredMonth" />
+		</step>
+		<step page="addVehicle_Owner" name="vehicleaquiredYear" type="SET" >
+		<parameter type="DATA" value="addVehicle_OwnerPD.vehicleaquiredYear" />
+		</step>
+		<step page="addVehicle_Owner" name="ownershipstatus" type="SET" >
+		<parameter type="DATA" value="addVehicle_OwnerPD.ownershipstatus" />
+		</step>
+		<step page="addVehicle_Owner" name="primaryuse" type="SET" >
+		<parameter type="DATA" value="addVehicle_OwnerPD.primaryuse" />
+		</step>
+		<step page="addVehicle_Owner" name="User_Env" type="WAIT" >
+		<parameter type="STATIC" value="40" />
+		</step>
+		<step page="addVehicle_Owner" name="rideforhireNo" type="CLICK" > </step>
+		<step page="addVehicle_Owner" name="vehicleprimarilyparkedYes" type="CLICK" > </step>
+		
+		<!-- <step page="addVehicle_Owner" name="addVehicle_Owner_addthisvehiclebtn" type="EXISTS" > </step> -->
+		
+		<step page="addVehicle_Owner" name="User_Env" type="WAIT" >
+		<parameter type="STATIC" value="40" />
+		</step>
+		<step page="addVehicle_Owner" name="addVehicle_Owner_addthisvehiclebtn" type="CLICK" > </step>
+		
+		<step page="addVehicle_Owner" name="User_Env" type="WAIT" >
+		<parameter type="STATIC" value="10" />
+		</step>
+				
+		<!-- <step page="addVehicle_Owner" name="addvehicle_continuebtn" type="EXISTS" > </step> -->
+		
+		<step page="addVehicle_Owner" name="addvehicle_continuebtn" type="CLICK" > </step>
+		
+		<step page="addVehicle_Owner" name="User_Env" type="WAIT" >
+		<parameter type="STATIC" value="40" />
+		</step>
+		
+</function>
+
+<function name="fAddPrimaryDriver" dataProvider="AddPrimaryDriverPD.TS1">
+		<!-- <step page="AddPrimaryDriver" name="genderFemale.VISIBLE" type="WAIT_FOR" /> -->
+		<step page="AddPrimaryDriver" name="genderMale" type="CLICK" > </step>
+		<step page="AddPrimaryDriver" name="mstatus" type="SET" >
+		<parameter type="DATA" value="AddPrimaryDriverPD.mstatus" />
+		</step>
+		<step page="AddPrimaryDriver" name="empstatus" type="SET" >
+		<parameter type="DATA" value="AddPrimaryDriverPD.empstatus" />
+		</step>
+		<step page="AddPrimaryDriver" name="firstdriverlicense" type="SET" >
+		<parameter type="DATA" value="AddPrimaryDriverPD.firstdriverlicense" />
+		</step>
+		
+		<step page="AddPrimaryDriver" name="accidentsstatusNo" type="CLICK" > </step>
+		<step page="AddPrimaryDriver" name="addressmorethan2yearsYes" type="CLICK" > </step>
+		
+		<step page="AddPrimaryDriver" name="currentresidence" type="SET" >
+		<parameter type="DATA" value="AddPrimaryDriverPD.currentresidence" />
+		</step>
+		<step page="AddPrimaryDriver" name="phonenumber" type="SET" >
+		<parameter type="DATA" value="AddPrimaryDriverPD.phonenumber" />
+		</step>
+		<step page="AddPrimaryDriver" name="emailid" type="SET" >
+		<parameter type="DATA" value="AddPrimaryDriverPD.emailid" />
+		</step>
+		
+		<step page="AddPrimaryDriver" name="USER_NAME" type="WAIT" >
+		<parameter type="STATIC" value="25" />
+		</step>
+		
+		<step page="AddPrimaryDriver" name="AddPrimaryDriver_agree_checkbox" type="CLICK" > </step>
+		
+		<step page="addVehicle_Owner" name="User_Env" type="WAIT" />
+		
+		<step page="AddPrimaryDriver" name="AddPrimaryDriver_Continuebtn" type="CLICK" > </step>
+		
+		<step page="addVehicle_Owner" name="User_Env" type="WAIT" />
+		
+		<step page="AddPrimaryDriver" name="AddDriver_Continuebtn" type="EXISTS" > </step>
+		
+		<step page="AddPrimaryDriver" name="AddDriver_Continuebtn" type="CLICK" > </step>
+		
+</function>
+
+<function name="fInsuranceHistory" dataProvider="InsuranceHistoryPD.TS1">
+		<step page="InsuranceHistory" name="currentautoins" type="WAIT" >
+		<parameter type="STATIC" value="15" />
+		</step>
+		<step page="InsuranceHistory" name="currentautoins" type="EXISTS" > </step>
+		<step page="InsuranceHistory" name="currentautoins" type="SET" >
+		<parameter type="DATA" value="InsuranceHistoryPD.currentautoins" />
+		</step>
+		<step page="InsuranceHistory" name="currentinsprovider" type="SET" >
+		<parameter type="DATA" value="InsuranceHistoryPD.currentinsprovider" />
+		</step>
+		
+		<step page="InsuranceHistory" name="policywrittenby" type="SET" >
+		<parameter type="DATA" value="InsuranceHistoryPD.policywrittenby" />
+		</step>
+		
+		<step page="InsuranceHistory" name="howlongpolicy" type="SET" >
+		<parameter type="DATA" value="InsuranceHistoryPD.howlongpolicy" />
+		</step>		
+		
+		<step page="InsuranceHistory" name="currentbodilylimit" type="SET" >
+		<parameter type="DATA" value="InsuranceHistoryPD.currentbodilylimit" />
+		</step>		
+		
+		<step page="InsuranceHistory" name="whenpolicyexpire" type="SET" >
+		<parameter type="DATA" value="InsuranceHistoryPD.whenpolicyexpire" />
+		</step>	
+		<step page="InsuranceHistory" name="whennewcovstart" type="SET" >
+		<parameter type="DATA" value="InsuranceHistoryPD.whennewcovstart" />
+		</step>	
+		<step page="InsuranceHistory" name="InsuranceHistory_continuebtn" type="CLICK" > </step>
+		<step page="InsuranceHistory" name="User_Env" type="WAIT">
+		<parameter type="STATIC" value="10" />
+		</step>
+		
+</function>
+
+<function name="fYourDiscountOpp" dataProvider="YourDiscountOppPD.TS1">
+		<step page="YourDiscountOpp" name="enrolldrivewise" type="SET" >
+		<parameter type="DATA" value="YourDiscountOppPD.enrolldrivewise" />
+		</step>
+		
+		<step page="YourDiscountOpp" name="YourDiscountOpp_continuebtn" type="EXISTS" > </step>
+		
+		<step page="YourDiscountOpp" name="YourDiscountOpp_continuebtn" type="CLICK" > </step>
+		<step page="YourDiscountOpp" name="YourDiscountOpp_continuebtn" type="WAIT" > </step>
+</function>
+
+<function name="fChooseYourQuoteType">
+		<step page="ChooseYourQuoteType" name="similarcov" type="EXISTS" > </step>
+		
+		<step page="ChooseYourQuoteType" name="similarcov" type="CLICK" > </step>
+		
+		<step page="ChooseYourQuoteType" name="User_Env" type="WAIT" />
+		
+		<step page="ChooseYourQuoteType" name="ChooseYourQuoteType_continuebtn" type="CLICK" > </step>
+		
+		<step page="ChooseYourQuoteType" name="User_Env" type="WAIT">
+		<parameter type="STATIC" value="23" />
+		</step>
+</function>
+
+<function name="fReviewYourQuote">
+
+		<step page="ReviewYourQuote" name="ReviewYourQuote_buynow" type="EXISTS" > </step>
+		<step page="ReviewYourQuote" name="User_Env" type="WAIT">
+		<parameter type="STATIC" value="15" />
+		</step>
+		<step page="ReviewYourQuote" name="ReviewYourQuote_buynow" type="CLICK" > </step>
+		
+		<step page="ReviewYourQuote" name="User_Env" type="WAIT">
+		<parameter type="STATIC" value="15" />
+		</step>
+</function>
+
+<function name="fFinalDetails" dataProvider="FinalDetailsPD.TS1">
+		<step page="FinalDetails" name="driverlicensenum" type="SET" >
+		<parameter type="DATA" value="FinalDetailsPD.driverlicensenum" />
+		</step>
+		<step page="FinalDetails" name="statelicensed" type="SET" >
+		<parameter type="DATA" value="FinalDetailsPD.statelicensed" />
+		</step>
+		<step page="FinalDetails" name="vinlearnmore" type="SET" >
+		<parameter type="DATA" value="FinalDetailsPD.vinlearnmore" />
+		</step>
+		<step page="FinalDetails" name="appodometerreading" type="SET" >
+		<parameter type="DATA" value="FinalDetailsPD.appodometerreading" />
+		</step>
+		<step page="FinalDetails" name="user_env" type="WAIT" > </step>
+		
+		<step page="FinalDetails" name="FinalDetails_continuebtn" type="CLICK" > </step>
+		
+		<step page="FinalDetails" name="User_Env" type="WAIT">
+		<parameter type="STATIC" value="10" />
+		</step>
+</function>
+
+<!-- <function name="fPaymentInfo" dataProvider="PaymentInfoPD.TS1">
+		<step page="PaymentInfo" name="User_Env" type="WAIT">
+		<parameter type="STATIC" value="20" />
+		</step>
+		<step page="PaymentInfo" name="Payment_Frame.VISIBLE" type="WAIT_FOR" />
+        <step page="PaymentInfo" name="Payment_Frame" type="AOS_KEYWORD" >
+       <parameter type="STATIC" value="BY_FRAMEINDEX" />    
+       <parameter type="STATIC" value="1" />                               
+       </step>  
+       
+       <step page="PaymentInfo" name="Payment_Frame" type="AOS_KEYWORD" >
+       <parameter type="STATIC" value="BY_FRAMEELEMENT" />    
+       <parameter type="STATIC" value="Payment_Frame" />                               
+       </step>  
+       <step name="SwitchTo" page="PaymentInfo" type="AOS_KEYWORD" >
+      <parameter type="STATIC" value="BY_DEFAULT" />                
+       </step>
+       
+       <step page="PaymentInfo" name="User_Env1" type="WAIT">
+		<parameter type="STATIC" value="20" />
+		</step>
+       <step name="SwitchTo" page="PaymentInfo" type="AOS_KEYWORD" >
+         <parameter type="STATIC" value="BY_DEFAULT" />                
+       </step>
+       
+		<step page="PaymentInfo" name="cardnum" type="SET" >
+		<parameter type="DATA" value="PaymentInfoPD.cardnum" />
+		</step>
+		<step page="PaymentInfo" name="cardexpdatemm" type="SET" >
+		<parameter type="DATA" value="PaymentInfoPD.cardexpdatemm" />
+		</step>
+		<step page="PaymentInfo" name="cardexpdateyyyy" type="SET" >
+		<parameter type="DATA" value="PaymentInfoPD.cardexpdateyyyy" />
+		</step>
+		<step name="SwitchTo" page="PaymentInfo" type="AOS_KEYWORD" >
+      <parameter type="STATIC" value="BY_DEFAULT" />                
+       </step>
+       <step page="PaymentInfo" name="user_env" type="WAIT" > </step>
+		<step page="PaymentInfo" name="PaymentInfo_continuebtn" type="CLICK" > </step>
+		
+		<step page="PaymentInfo" name="user_env" type="WAIT" > </step>
+</function>
+
+<function name="freviewYourInformation">
+		<step page="reviewYourInformation" name="reviewYourInformation_Purchasenowbtn" type="EXISTS" > </step>
+		<step page="reviewYourInformation" name="User_Env" type="WAIT">
+		<parameter type="STATIC" value="30" />
+		</step>
+		<step page="reviewYourInformation" name="reviewYourInformation_Purchasenowbtn" type="CLICK" > </step>
+		
+		<step page="reviewYourInformation" name="User_Env" type="WAIT">
+		<parameter type="STATIC" value="30" />
+		</step>
+</function>
+
+<function name="getPolicyNumber">
+		<step page="thankyouPurchase" name="PolicyNumber" type="EXISTS" > </step>
+		<step page="thankyouPurchase" name="User_Env" type="WAIT">
+		<parameter type="STATIC" value="90" />
+		</step>
+		<step page="thankyouPurchase" name="PolicyNumber" type="ATTRIBUTE" context="AutoPolicyNumber" >
+		 <parameter type="STATIC" value="textContent" />
+	 </step> 
+	 
+	  <step page="thankyouPurchase" name="PolicyNumber" type="REPORT" >
+		 <parameter type="CONTEXT" value="AutoPolicyNumber" />
+	 </step> 
+	 
+</function> 
+ -->
+</suite>
+
+
+

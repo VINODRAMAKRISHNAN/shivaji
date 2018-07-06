@@ -1,0 +1,121 @@
+---
+
+
+- name: Include Master Variables List
+  include_vars: "{{ item }}"
+  with_items:
+     - roles/group_vars/all/vars.yml
+     - roles/group_vars/java/vars.yml
+
+- name: disable UAC pop up for Administrators
+  win_regedit:
+    key: HKLM:\Software\Microsoft\Windows\CurrentVersion\Policies\System
+    value: ConsentPromptBehaviorAdmin
+    data: 00000000
+    datatype: dword
+
+- name: Set WinLogin for DefaultUserName
+  win_regedit:
+    path: HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon
+    name: DefaultUserName
+    data: "{{ user }}"
+ 
+- name: Set WinLogin for DefaultPassword
+  win_regedit:
+    path: HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon
+    name: DefaultPassword
+    data: "{{ user }}"
+
+- name: Set WinLogin for AutoAdminLogon
+  win_regedit:
+    path: HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon
+    name: AutoAdminLogon
+    data: 1
+
+- name: Disable Windows Updates Services on Windows Host
+  win_service:
+    name: AmazonSSMAgent
+    start_mode: disabled
+    state: stopped
+  when: curmode=="up"
+
+- name: Remove Service AmazonSSMAgent
+  win_service:
+    name: AmazonSSMAgent
+    state: absent
+  when: curmode=="up"
+
+ 
+- name: Create ssm related Folders
+  win_file:
+    path: '{{ target_drive }}\{{ item }}'
+    state: directory
+  with_items:
+     - seleniumgridnode
+     - ssm
+
+
+
+- name: Copy ssm agent batch file to Win Startup
+  win_copy:
+    src: dest-files/run-ssm-agent.bat
+    dest: '{{ target_drive }}\seleniumgridnode\run-ssm-agent.bat'
+
+
+- name: Copy ssm agent link file to Win Startup
+  win_copy:
+    src: dest-files/run-ssm-agent.bat.lnk
+    dest: '{{ target_drive }}\ProgramData\Microsoft\Windows\Start Menu\Programs\Startup\run-ssm-agent.bat.lnk'
+
+
+
+- name: Copy seleniumhub jar file to ssm folder
+  win_copy:
+    src: dest-files/selenium-server-standalone-3.12.0.jar
+    dest: '{{ target_drive }}\ssm\selenium-server-standalone.jar'
+
+- name: Copy selenium chrome browser driver exe file to ssm folder
+  win_copy:
+    src: dest-files/chromedriver.exe
+    dest: '{{ target_drive }}\ssm\chromedriver.exe'
+
+- name: Copy selenium ie browser driver exe file to ssm folder
+  win_copy:
+    src: dest-files/IEDriverServer.exe
+    dest: '{{ target_drive }}\ssm\IEDriverServer.exe'
+
+- name: Create connect-to-hub batch file
+  win_file:
+    path: c:\ssm\connect-to-hub.bat
+    state: touch
+
+
+- name: Add required text to connect-to-hub batch file
+  win_lineinfile:
+    path: c:\ssm\connect-to-hub.bat
+    line: '{{ item }}'
+  with_items:
+    - 'echo off'
+    - set arg1driver=%1
+    - set arg2driverexe=%2
+    - set arg3hubip=%3
+    - set arg4hubport=%4
+    - set arg5nodeport=%5
+    - set arg6browsername=%6
+    - set arg7appname=%7
+    - java -Dwebdriver.%arg1driver%.driver="C:\ssm\%arg2driverexe%.exe" -jar C:\ssm\selenium-server-standalone.jar -role node -hub http://%arg3hubip%:%arg4hubport%/grid/register -port %arg5nodeport% -browser "browserName=%arg6browsername%, applicationName=%arg7appname%, maxInstances=1"
+
+
+
+#- name: Copy connect hub batch file to ssm folder
+#  win_copy:
+#    src: dest-files/connect-to-hub.bat
+#    dest: '{{ target_drive }}\ssm\connect-to-hub.bat'
+
+
+#- name: Create batchfile shortcut on the startup
+#  win_shortcut:
+#    src: '{{ target_drive }}\seleniumgridnode\run-ssm-agent.bat'
+#    dest: '{{ target_drive }}\ProgramData\Microsoft\Windows\Start Menu\Programs\Startup\run-ssm-agent.bat.lnk'
+#    directory: '{{ target_drive }}\seleniumgridnode'
+

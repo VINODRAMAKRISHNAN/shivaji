@@ -1,0 +1,18 @@
+---
+
+- name: Disable IE Protected Mode for current users 
+  win_regedit:
+    path: HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Internet Settings\Zones\{{ item }}\
+    name: '2500'
+    data: 3
+    type: dword
+  with_items: 
+     - 0
+     - 1
+     - 2
+     - 3
+     - 4
+
+
+
+

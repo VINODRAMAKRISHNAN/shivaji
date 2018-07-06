@@ -1,0 +1,4 @@
+[seleniumhub-linux]
+seleniumhub ansible_host=10.0.2.46
+ 
+
