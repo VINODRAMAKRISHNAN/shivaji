@@ -58,7 +58,7 @@ node("master"){
     
    
     utilb.stopRequiredInstancesByArray(ret);
-    println ('successfully started the instances and connected to the hub');
+    println ('successfully started the instances, connected to the hub, tested and stopped the instances');
     
 }
 
